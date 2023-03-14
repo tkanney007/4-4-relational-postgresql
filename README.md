@@ -1,4 +1,4 @@
-# Insert Lesson Title
+# Relational Databases and PostgreSQL
 
 ## Dependencies
 
@@ -10,10 +10,14 @@ Refer to the following markdown file for the respective sections of the class:
 ## Lesson Objectives
 
 Learners will understand:
-- Insert the knowledge to be acquired
+- What relational databases are and how they are managed
+- What Data Definition Language is
+- What Data Manipulation Language is
+- What is SQL
 
 Learners will be able to:
-- Insert the skillset to be acquired
+- Create databases using SQL
+- Perform CRUD (Create, Retrieve, Update, Delete) queries using SQL
 
 
 ## Lesson Plan
