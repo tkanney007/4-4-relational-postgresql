@@ -20,4 +20,4 @@ Technical knowledge is vast. Timebox yourself for 3 hours to work on the followi
 ### Helpful Links (References)
 
 - [Draw.io](https://app.diagrams.net/)
-- [Installation]
+- [Installation for PostgreSQL](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/)
