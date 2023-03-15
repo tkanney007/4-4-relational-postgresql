@@ -118,20 +118,19 @@ The following constraints are commonly used in SQL:
 - PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
 - FOREIGN KEY - Prevents actions that would destroy links between tables
 - DEFAULT - Sets a default value for a column if no value is specified
-- AUTO_INCREMENT - Allows a unique number to be generated automatically when a new record is inserted into a table.
 
 ```sql
 CREATE TABLE categories (
-    id INT NOT NULL AUTO_INCREMENT,
+    id SERIAL NOT NULL,
     name VARCHAR(255) UNIQUE NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE items (
-    id INT NOT NULL AUTO_INCREMENT,
+    id SERIAL NOT NULL,
     name VARCHAR(255) NOT NULL,
-    price DOUBLE(10, 2) NOT NULL,
-    description TEXT(1000),
+    price NUMERIC(10, 2) NOT NULL,
+    description TEXT,
     category_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (category_id) 
@@ -142,6 +141,8 @@ CREATE TABLE items (
 ```
 
 The foreign key references another table's primary key. This is useful for establishing relationships between tables. The `ON DELETE` and `ON UPDATE` constraints define what happens to a row in the table when the parent is updated or deleted.
+
+*Note: mySQL uses AUTO_INCREMENT constraint instead of the SERIAL data type*
 
 ### Altering Tables
 
@@ -192,16 +193,16 @@ VALUES (value1, value2, value3, ...);
 
 Example:
 ```sql
-INSERT INTO categories (name) VALUES ("fruits");
-INSERT INTO categories (name) VALUES ("vegetables");
+INSERT INTO categories (name) VALUES ('fruits');
+INSERT INTO categories (name) VALUES ('vegetables');
 ```
 
-Note that the id column / field doesn't need have to have values. This is because when the table was created, the id field was made into `AUTO_INCREMENT`, which means it adds automatically a new id for each new row.
+Note that the id column / field doesn't need have to have values. This is because when the table was created, the id field was made into `SERIAL`, which means it adds automatically a new id for each new row.
 
 ```sql
-INSERT INTO items (name, price, description, category_id) VALUES ("Banana", 18.75, "A bunch of yellow bananas");
-INSERT INTO items (name, price, description, category_id) VALUES ("Strawberry", 70.99, "Fresh strawberries");
-INSERT INTO items (name, price, description, category_id) VALUES ("Celery", 5.00, "A sprig of celery");
+INSERT INTO items (name, price, description) VALUES ('Banana', 18.75, 'A bunch of yellow bananas');
+INSERT INTO items (name, price, description) VALUES ('Strawberry', 70.99, 'Fresh strawberries');
+INSERT INTO items (name, price, description) VALUES ('Celery', 5.00, 'A sprig of celery');
 ```
 
 ### Querying entries
@@ -235,7 +236,7 @@ SELECT * FROM categories;
 
 SELECT name, price FROM items;
 
-SELECT * FROM items WHERE name = "Banana";
+SELECT * FROM items WHERE name = 'Banana';
 
 SELECT * FROM items WHERE price > 10;
 ```
@@ -255,9 +256,9 @@ The `SET` clause applies new values to specific columns of the rows. The `WHERE`
 
 Example:
 ```sql
-UPDATE items SET category_id = 1 WHERE name = "Banana";
-UPDATE items SET category_id = 1 WHERE name = "Strawberry";
-UPDATE items SET category_id = 2 WHERE name = "Celery";
+UPDATE items SET category_id = 1 WHERE name = 'Banana';
+UPDATE items SET category_id = 1 WHERE name = 'Strawberry';
+UPDATE items SET category_id = 2 WHERE name = 'Celery';
 ```
 
 ### Deleting queries
@@ -273,7 +274,7 @@ The `WHERE` clause is important here as it would determine which rows are to be 
 
 Example:
 ```sql
-DELETE FROM items WHERE name = "Strawberry";
+DELETE FROM items WHERE name = 'Strawberry';
 SELECT * FROM items;
 ```
 

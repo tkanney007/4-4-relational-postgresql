@@ -1,18 +1,19 @@
 CREATE DATABASE ecommerce;
 
-USE ecommerce;
+-- \l -> to display all the databases
+-- \c ecommerce -> this is to access the database
 
 CREATE TABLE categories (
-    id INT NOT NULL AUTO_INCREMENT,
+    id SERIAL NOT NULL,
     name VARCHAR(255) UNIQUE NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE items (
-    id INT NOT NULL AUTO_INCREMENT,
+    id SERIAL NOT NULL,
     name VARCHAR(255) NOT NULL,
-    price DOUBLE(10, 2) NOT NULL,
-    description TEXT(1000),
+    price NUMERIC(10, 2) NOT NULL,
+    description TEXT,
     category_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (category_id) 
@@ -21,23 +22,26 @@ CREATE TABLE items (
         ON UPDATE CASCADE
 );
 
-INSERT INTO categories (name) VALUES ("fruits");
-INSERT INTO categories (name) VALUES ("vegetables");
+-- \dt -> to show all tables
 
-INSERT INTO items (name, price, description, category_id) VALUES ("Banana", 18.75, "A bunch of yellow bananas");
-INSERT INTO items (name, price, description, category_id) VALUES ("Strawberry", 70.99, "Fresh strawberries");
-INSERT INTO items (name, price, description, category_id) VALUES ("Celery", 5.00, "A sprig of celery");
+INSERT INTO categories (name) VALUES ('fruits');
+INSERT INTO categories (name) VALUES ('vegetables');
+
+INSERT INTO items (name, price, description) VALUES ('Banana', 18.75, 'A bunch of yellow bananas');
+INSERT INTO items (name, price, description) VALUES ('Strawberry', 70.99, 'Fresh strawberries');
+INSERT INTO items (name, price, description) VALUES ('Celery', 5.00, 'A sprig of celery');
 
 SELECT * FROM categories;
 SELECT name, price FROM items;
-SELECT * FROM items WHERE name = "Banana";
+SELECT * FROM items WHERE name = 'Banana';
 SELECT * FROM items WHERE price > 10;
 
-UPDATE items SET category_id = 1 WHERE name = "Banana";
-UPDATE items SET category_id = 1 WHERE name = "Strawberry";
-UPDATE items SET category_id = 2 WHERE name = "Celery";
+UPDATE items SET category_id = 1 WHERE name = 'Banana';
+UPDATE items SET category_id = 1 WHERE name = 'Strawberry';
+UPDATE items SET category_id = 2 WHERE name = 'Celery';
+SELECT * FROM items;
 
-DELETE FROM items WHERE name = "Strawberry";
+DELETE FROM items WHERE name = 'Strawberry';
 SELECT * FROM items;
 
 SELECT c.name, i.name, i.description 
